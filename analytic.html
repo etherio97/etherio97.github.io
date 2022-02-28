@@ -33,6 +33,7 @@
       <table>
         <thead>
           <tr>
+            <th>Client IP</th>
             <th>Request Path</th>
             <th>Screen Size</th>
             <th>Platform</th>
@@ -42,14 +43,28 @@
         </thead>
         <tbody>
           <tr v-for="client in clients">
-            <td><code>{{client.currentUrl}}</code></td>
-            <td>{{client.screenHeight}}x{{client.screenWidth}}</td>
+            <td>
+              <p>{{client.ip}}</p>
+              <a :href="'https://ipinfo.io/'+client.clientIp" target="_blank" rel="noopener noreferrer">
+                <code>{{client.clientIp}}</code>
+              </a>
+            </td>
+            <td>
+              <code>{{client.currentUrl}}</code>
+            </td>
+            <td>
+              {{client.screenHeight}}x{{client.screenWidth}}
+            </td>
             <td>
               {{getOS(client.userAgent).name}}
-              {{getOS(client.userAgent).version}}
+              <code>{{getOS(client.userAgent).version}}</code>
             </td>
-            <td>{{getBrowser(client.userAgent).name}}</td>
-            <td>{{getDate(client.createdAt)}}</td>
+            <td>
+              {{getBrowser(client.userAgent).name}}
+            </td>
+            <td>
+              {{getDate(client.createdAt)}}
+            </td>
           </tr>
         </tbody>
       </table>
